@@ -36,9 +36,9 @@ function App() {
     setLoadingNews(true);
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=tesla&apiKey=609c6c96d36d4bdebd42c45daab93462`
+        `https://newsdata.io/api/1/news?apikey=pub_38704c96c835ffc76e06a96e4ea7d1212235&country=au,us`
       );
-      setNews(response.data.articles);
+      setNews(response.data.results);
     } catch (error) {
       console.error(error);
     } finally {
