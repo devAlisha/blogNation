@@ -1,39 +1,45 @@
 import { Link } from "react-router-dom";
 
 export default function BlogItem({ blog }) {
-  console.log(blog);
   return (
-    <Link to={`/blogs/${blog.id}`}>
-      <div className="flex gap-x-7 cursor-pointer hover:bg-blue-50 p-[10px] m-[-10px] rounded rounded-lg">
-        <div className="">
-          <img
-            src={blog?.img}
-            alt={blog?.title}
-            className="min-w-[50px] max-w-[50px] rounded rounded-full h-auto"
-          />
-        </div>
-        <div>
-          <div className="flex flex-col gap-y-1">
-            <h1 className="text-md font-medium">{blog?.title}</h1>
-            <div className="flex justify-between">
-              <div className="text-xs font-light text-gray-500">
-                By: {blog.author}
-              </div>
-              <div className="text-xs font-light text-gray-500">
-                {blog.date}
-              </div>
-            </div>
-            <p className="text-sm font-light text-gray-700">{blog?.content}</p>
-          </div>
-          <div className="flex flex-wrap gap-2 pt-2">
-            {blog?.tags.map((tag) => (
-              <span className="text-xs text-blue-500 cursor-pointer">
-                #{tag}
-              </span>
-            ))}
-          </div>
+    <article className="flex max-w-xl flex-col items-start justify-between pb-5 border-b border-gray-700">
+      <div className="flex items-center gap-x-4 text-xs text-gray-400">
+        <time dateTime={blog.date}>{blog.date}</time>
+        <div className="relative z-auto rounded-full bg-gray-700 px-3 py-1.5 font-medium text-white hover:bg-gray-600">
+          {blog.category}
         </div>
       </div>
-    </Link>
+      <div className="group relative">
+        <h3 className="mt-3 text-lg font-semibold leading-6 text-white group-hover:text-gray-300">
+          <Link to={blog.id}>
+            <span className="absolute inset-0" />
+            {blog.title}
+          </Link>
+        </h3>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          {blog?.tags.map((tag) => (
+            <span className="text-xs text-blue-500 cursor-pointer">#{tag}</span>
+          ))}
+        </div>
+
+        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-400">
+          {blog.content}
+        </p>
+      </div>
+      <div className="relative mt-8 flex items-center gap-x-4">
+        <img
+          src={blog.img}
+          alt=""
+          className="h-10 w-10 rounded-full bg-gray-700"
+        />
+        <div className="text-sm leading-6">
+          <p className="font-semibold text-white">
+              <span className="absolute inset-0" />
+              {blog.author}
+          </p>
+        </div>
+      </div>
+    </article>
   );
 }
